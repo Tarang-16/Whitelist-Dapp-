@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Whitelist.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.7;\n\ncontract Whitelist {\n    uint256 userNum = 0;\n    uint256 maxUserNum = 10;\n    mapping(address => bool) public member;\n\n    function joinWhitelist() public {\n        require(!member[msg.sender], \"You are already a member\");\n        require(userNum < maxUserNum, \"Sorry! We are full\");\n\n        userNum += 1;\n        member[msg.sender] = true;\n    }\n\n    function getUserNum() public view returns (uint256) {\n        return userNum;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
